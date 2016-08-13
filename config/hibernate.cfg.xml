@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+
+	<!-- Database connection settings -->
+	<!-- <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="connection.url">jdbc:hsqldb:hsql://localhost/TestDB</property> -->
+
+	<!--下面的配置内容改写到了 spring配置文件中的dataSource bean里面了  -->
+	<!-- <property name="connection.driver_class">
+		com.mysql.jdbc.Driver
+		</property>
+		<property name="connection.url">
+		jdbc:mysql:///footablematch_20160711
+		</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property> -->
+
+	<!--自动建表（更新表）  update：表示自动根据model对象来更新表结构，
+		启动hibernate时会自动检查数据库，如果缺少表，则自动建表；如果表里缺少列，则自动添加列  -->
+	<property name="hbm2ddl.auto">update</property>
+
+	<!-- JDBC connection pool (use the built-in) -->
+	<property name="connection.pool_size">1</property>
+
+	<!-- SQL dialect -->
+	<property name="dialect">
+		org.hibernate.dialect.MySQL5InnoDBDialect
+	</property>
+
+	<!-- Enable Hibernate's automatic session context management -->
+	<!-- <property name="current_session_context_class">thread</property>
+		
+		<property name="cache.use_query_cache">true</property>
+		<property name="cache.use_second_level_cache">true</property>
+		<property name="cache.use_structured_entries">true</property>
+		<property name="cache.region.factory_class">
+		org.hibernate.cache.EhCacheRegionFactory
+		</property>
+		<property name="net.sf.ehcache.configurationResourceName">
+		/hibernate-config/ehcache.xml
+		</property> -->
+	<!-- Echo all executed SQL to stdout -->
+	<property name="show_sql">true</property>
+
+	<!--导入映射配置  -->
+	<mapping resource="com/xl/fm/domain/Coach.hbm.xml" />
+	<mapping resource="com/xl/fm/domain/Country.hbm.xml" />
+	<mapping resource="com/xl/fm/domain/Match.hbm.xml" />
+	<mapping resource="com/xl/fm/domain/Player.hbm.xml" />
+	<mapping resource="com/xl/fm/domain/Privilege.hbm.xml" />
+	<mapping resource="com/xl/fm/domain/User.hbm.xml" />
+
+
+</session-factory>
+
+</hibernate-configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

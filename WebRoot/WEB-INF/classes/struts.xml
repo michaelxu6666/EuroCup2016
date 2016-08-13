@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts> 
+	
+	
+	
+	<!-- 配置扩展名为action -->
+    <constant name="struts.action.extension" value="action" />
+    
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+	
+	  <!--声明一个自定义的拦截器  -->
+<interceptors>
+  	<interceptor name="checkPrivilege" class="com.xl.fm.interceptor.CheckPrivilegeInterceptor"></interceptor>
+  	
+  	<interceptor-stack name="myStack">
+                <interceptor-ref name="checkPrivilege"/>
+                <interceptor-ref name="defaultStack"/>
+    </interceptor-stack>
+  </interceptors>
+  <default-interceptor-ref name="myStack"/> 
+  <!--配置全局的reslut  -->
+  <global-results>
+ 		<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+ 		<result name="noPrivilegeError">/noPrivilegeError.jsp</result>
+  </global-results>
+  
+   
+	<!--测试用的Action  -->
+     <action name="testAction_*" class="testAction" method="{1}">
+     	<result name="test">/WEB-INF/jsp/testAction/test.jsp</result>
+     </action>
+     
+      <!--player相关的Action  -->
+     <action name="playerAction_*" class="playerAction" method="{1}">
+     	<result name="list">/WEB-INF/jsp/playerAction/list.jsp</result>
+     	<result name="addUI">/WEB-INF/jsp/playerAction/addUI.jsp</result>
+     	<result name="editUI">/WEB-INF/jsp/playerAction/editUI.jsp</result>
+     	<result name="toList" type="redirectAction">playerAction_list</result>
+     </action>
+     
+      <!--Country相关的Action  -->
+     <action name="countryAction_*" class="countryAction" method="{1}">
+     	<result name="list">/WEB-INF/jsp/countryAction/list.jsp</result>
+     	<result name="addUI">/WEB-INF/jsp/countryAction/addUI.jsp</result>
+     	<result name="editUI">/WEB-INF/jsp/countryAction/editUI.jsp</result>
+     	<result name="toList" type="redirectAction">countryAction_list</result>
+     </action>
+     
+      <!--Coach相关的Action  -->
+     <action name="coachAction_*" class="coachAction" method="{1}">
+     	<result name="list">/WEB-INF/jsp/coachAction/list.jsp</result>
+     	<result name="addUI">/WEB-INF/jsp/coachAction/addUI.jsp</result>
+     	<result name="editUI">/WEB-INF/jsp/coachAction/editUI.jsp</result>
+     	<result name="toList" type="redirectAction">coachAction_list</result>
+     </action>
+     
+      <!--match相关的Action  -->
+     <action name="matchAction_*" class="matchAction" method="{1}">
+     	<result name="list">/WEB-INF/jsp/matchAction/list.jsp</result>
+     	<result name="addUI">/WEB-INF/jsp/matchAction/addUI.jsp</result>
+     	<result name="editUI">/WEB-INF/jsp/matchAction/editUI.jsp</result>
+     	<result name="toList" type="redirectAction">matchAction_list</result>
+     </action>
+     
+     <!--user相关的Action  -->
+     <action name="userAction_*" class="userAction" method="{1}">
+     	<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
+     	<result name="addUI">/WEB-INF/jsp/userAction/addUI.jsp</result>
+     	<result name="editUI">/WEB-INF/jsp/userAction/editUI.jsp</result>
+     	<result name="setPrivilegeUI">/WEB-INF/jsp/userAction/setPrivilegeUI.jsp</result>
+     	<result name="toList" type="redirectAction">userAction_list</result>
+     	
+     	
+     	<result name="toIndex" type="redirect">/index.jsp</result>
+     	<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
+     </action>
+     
+     <!--首页 -->
+     <action name="homeAction_*" class="homeAction" method="{1}">
+     	<result name="{1}">/WEB-INF/jsp/homeAction/{1}.jsp</result>
+     </action>
+     
+    </package>
+
+
+    <!-- Add packages here -->
+
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!--
+
+  This mapping demonstrates
+
+     (1) use of lazy properties - this feature requires buildtime
+         bytecode instrumentation; we don't think this is a very
+         necessary feature, but provide it for completeleness; if
+         Hibernate encounters uninstrumented classes, lazy property
+         fetching will be silently disabled, to enable testing
+
+     (2) use of a formula to define a "derived property"
+
+-->
+
+<hibernate-mapping package="com.xl.fm.domain">
+
+    <class name="Match" table="footablematch_match">
+    	<id name="id">
+    		<generator class="increment"/>
+    	</id>
+    	<property name="name" />
+    	
+    	<property name="matchTime" type="timestamp"></property>
+    	
+    	<property name="matchPosition"></property>
+    	
+    	<property name="win" type="java.lang.Boolean"></property>
+
+    	<!--coutries 属性，本类与Country的多对多关系  -->
+		<set name="countries" table="footablematch_match_country" lazy="false">
+			<key column="matchId"></key>
+			<many-to-many class="Country" column="countryId"></many-to-many>
+		</set>
+		<!--players 属性，本类与Player类的多对多关系 -->    
+		<set name="players" table="footablematch_match_player" lazy="false">
+			<key column="matchId"></key>
+			<many-to-many class="Player" column="playerId"></many-to-many>
+		</set>	
+		
+    	
+	</class>
+
+	
+</hibernate-mapping>
